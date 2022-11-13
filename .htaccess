@@ -1,0 +1,27 @@
+RewriteEngine On
+RewriteBase /demo19/
+
+# external redirect from actual URL to pretty one
+RewriteCond %{THE_REQUEST} /product(?:\.php)?\?id=([^\s&]+) [NC]
+
+# To externally redirect /dir/abc.php to /dir/abc
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^booking/([^.]+?)/?$ booking.php?id=$1 [QSA,L,NC]
+RewriteRule ^course/([^.]+?)/?$ course.php?id=$1 [QSA,L,NC]
+RewriteRule ^course-details/([^.]+?)/?$ course-details.php?id=$1 [QSA,L,NC]
+RewriteRule ^news/([^.]+?)/?$ news.php?id=$1 [QSA,L,NC]
+RewriteRule ^blog-list/([^.]+?)/?$ blog-list.php?id=$1 [QSA,L,NC]
+RewriteRule ^blog/([^.]+?)/?$ blog.php?id=$1 [QSA,L,NC]
+RewriteRule ^produt/([^.]+?)/?$ produt.php?id=$1 [QSA,L,NC]
+RewriteRule ^gallery/([^.]+?)/?$ gallery.php?id=$1 [QSA,L,NC]
+RewriteRule ^trips/([^.]+?)/?$ trips.php?id=$1 [QSA,L,NC]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^.]+?)/?$ $1.php [L]
